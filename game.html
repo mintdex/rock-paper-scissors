@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock paper scissors</title>
+</head> 
+<body>
+    <script>
+
+        
+        function computerPlay() {
+            const selectionArr = ["rock", "paper", "scissors"];
+            
+            // random a number from 0 to 2
+            const computerSelection = Math.floor((Math.random() * 10) % 3);
+
+            return selectionArr[computerSelection];
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            const pSelection = playerSelection.toLowerCase();
+            
+            if (playerSelection === computerSelection) {
+                return 0;
+            } else if (
+                playerSelection === "rock" && computerSelection === "scissors" ||
+                playerSelection === "paper" && computerSelection === "rock" ||
+                playerSelection === "scissors" && computerSelection === "paper") {
+                
+                    return 1;
+            } else {
+                return 2;
+            }
+            
+        }
+        
+        (function game() {
+            
+            const winScore = 5;
+            let playerScore = 0;
+            let computerScore = 0;
+            
+            while (true) {
+                const playerSelection = window.prompt("What is your selection? Rock, paper or scissors?");
+                const computerSelection = computerPlay();
+                
+                let result = playRound(playerSelection, computerSelection);
+                let resultMess = ["Tie game", "You win", "You lose"];
+                if (result === 0) {
+                    console.log(resultMess[result]);
+                } else if (result === 1) {
+                    playerScore++;
+                    console.log(resultMess[result]);
+                } else {
+                    computerScore++;
+                    console.log(resultMess[result]);
+                }
+                console.log(`Your score: ${playerScore} || AI score: ${computerScore}`);
+
+                if (playerScore === winScore) {
+                    console.log("You win the game!!!!");
+                    break;
+                } else if (computerScore === winScore) {
+                    console.log("Computers have conquered the EARTH!!!!!!");
+                    break;
+                }
+            }
+        })();
+
+    </script>
+</body>
+</html>
